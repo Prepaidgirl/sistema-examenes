@@ -5,29 +5,33 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "UsuarioRol")
-public class UsuarioRol {
+@Table(name = "usuario_roles")
+public class UsuarioRol {  
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
-    private long UsuarioRolId;
+    private Long UsuarioRolId;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
     @ManyToOne
+    @JoinColumn(name = "rol_id")
     private Rol rol;
 
-    public long getUsuarioRolId() {
+   
+    public Long getUsuarioRolId() {
         return UsuarioRolId;
     }
 
-    public void setUsuarioRolId(long usuarioRolId) {
+    public void setUsuarioRolId(Long usuarioRolId) {
         UsuarioRolId = usuarioRolId;
     }
 

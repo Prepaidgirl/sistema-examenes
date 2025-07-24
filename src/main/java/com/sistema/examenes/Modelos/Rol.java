@@ -13,28 +13,16 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Roles")
+@Table(name = "roles")
 public class Rol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long rolid;
+    private Long rolid;
     private String nombre;
-
 
     @OneToMany (cascade=CascadeType.ALL,fetch=FetchType.LAZY, mappedBy="rol")
     private Set<UsuarioRol>usuarioRoles=new HashSet<>();
-
-
-
-    public long getRolid() {
-        return rolid;
-    }
-
-
-    public void setRolid(long rolid) {
-        this.rolid = rolid;
-    }
 
 
     public String getNombre() {
@@ -58,5 +46,15 @@ public class Rol {
     
     public Rol(){
         
+    }
+
+
+    public Long getRolid() {
+        return rolid;
+    }
+
+
+    public void setRolid(Long rolid) {
+        this.rolid = rolid;
     }
 }

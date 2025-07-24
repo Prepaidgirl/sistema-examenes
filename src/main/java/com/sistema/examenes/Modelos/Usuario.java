@@ -2,6 +2,9 @@ package com.sistema.examenes.Modelos;
 
 
 import java.util.HashSet;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -18,32 +21,24 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String nombre;
     private String apellido;
     private String email;
     private String password;
-    private String rol;
     private String username;
     private String telefono;
     private String enabled = "true";
+    private String perfil;
 
     @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="usuario")
-    private HashSet<UsuarioRol> usuarioRoles = new HashSet<>();
+    @JsonIgnore 
+    private Set<UsuarioRol> usuarioRoles = new HashSet<>();
 
     
     public Usuario() {
     }
 
-    
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getNombre() {
         return nombre;
@@ -77,14 +72,6 @@ public class Usuario {
         this.password = password;
     }
 
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
-    }
-
     public String getTelefono() {
         return telefono;
     }
@@ -92,6 +79,16 @@ public class Usuario {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
+    public Set<UsuarioRol> getUsuarioRoles() {
+        return usuarioRoles;
+    }
+
+
+    public void setUsuarioRoles(Set<UsuarioRol> usuarioRoles) {
+        this.usuarioRoles = usuarioRoles;
+    }
+
 
     public String getEnabled() {
         return enabled;
@@ -111,16 +108,26 @@ public class Usuario {
         this.username = username;
     }
 
+    public void setUsuarioRoles(HashSet<UsuarioRol> usuarioRoles) {
+        this.usuarioRoles = usuarioRoles;
+    }
 
+    public String getPerfil() {
+        return perfil;
+    }
 
-    public HashSet<UsuarioRol> getUsuarioRoles() {
-        return usuarioRoles;
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
     }
 
 
+    public Long getId() {
+        return id;
+    }
 
-    public void setUsuarioRoles(HashSet<UsuarioRol> usuarioRoles) {
-        this.usuarioRoles = usuarioRoles;
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }

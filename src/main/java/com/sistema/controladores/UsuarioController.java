@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,13 +13,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sistema.Servicios.UsuariosService;
 import com.sistema.examenes.Modelos.Rol;
 import com.sistema.examenes.Modelos.Usuario;
 import com.sistema.examenes.Modelos.UsuarioRol;
-import com.sistema.Servicios.UsuariosService;
 
 @RestController
 @RequestMapping("/usuarios")
+@CrossOrigin("*")
 public class UsuarioController {
 
     @Autowired
@@ -43,8 +45,7 @@ public class UsuarioController {
     @GetMapping("/{username}")
     public Usuario obtenerUsuario(@PathVariable("username")String username){
       return usuariosService.obtenerUsuario(username);
-      
-
+    
     }
 
     @DeleteMapping("/{usuarioId}")
