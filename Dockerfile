@@ -10,6 +10,6 @@ VOLUME /tmp
 
 EXPOSE 8015
 
-ADD ./target/sistema-examenes-0.0.1-SNAPSHOT.jar sistema-examenes.jar
+ADD ./target/sistema-examenes-backend-0.0.1-SNAPSHOT.jar sistema-examenes-backend.jar
 
-ENTRYPOINT java -Xmx$XMX -jar /sistema-examenes.jar --spring.profiles.active=$PROFILE
+ENTRYPOINT java -Xmx$XMX -jar /sistema-examenes-backend.jar --spring.profiles.active=$PROFILE
