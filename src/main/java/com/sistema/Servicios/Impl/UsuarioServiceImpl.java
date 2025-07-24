@@ -50,8 +50,7 @@ public class UsuarioServiceImpl  implements UsuariosService {
 
     @Override
     public void eliminarUsuario(long usuarioId) {
-        usuarioRespository.deleteById(usuarioId);
-        
+        usuarioRespository.deleteById(usuarioId);  
     }
 }
 
