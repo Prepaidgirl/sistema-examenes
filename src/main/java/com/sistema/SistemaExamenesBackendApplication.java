@@ -1,18 +1,18 @@
 package com.sistema;
 
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.sistema.Servicios.UsuariosService;
+//import com.sistema.Servicios.UsuariosService;
 
 @SpringBootApplication
 public class SistemaExamenesBackendApplication implements CommandLineRunner {
 
 
-     @Autowired
-    private UsuariosService usuariosService;
+   //  @Autowired
+   // private UsuariosService usuariosService;
 
     public static void main(String[] args) {
         SpringApplication.run(SistemaExamenesBackendApplication.class, args);

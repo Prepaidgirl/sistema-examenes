@@ -52,6 +52,11 @@ public class UsuarioServiceImpl  implements UsuariosService {
     public void eliminarUsuario(long usuarioId) {
         usuarioRespository.deleteById(usuarioId);  
     }
+
+    @Override
+    public void actualizarUsuario(Usuario usuario) {
+        
+    }
 }
 
     
