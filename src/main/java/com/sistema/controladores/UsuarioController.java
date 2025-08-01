@@ -26,7 +26,11 @@ public class UsuarioController {
     @Autowired
     private UsuariosService usuariosService;
 
-
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Usuario guardado exitosamente"),
+        @ApiResponse(code = 400, message = "Error al guardar el usuario")
+        @ApiResponse(code = 500, message = "Error interno del servidor")
+    })
     @PostMapping("/")
     public Usuario guardarUsuario(@RequestBody Usuario usuario) throws Exception {
       Set<UsuarioRol> roles = new HashSet<>();
@@ -40,14 +44,23 @@ public class UsuarioController {
       usuarioRol.setRol(rol);
 
       return usuariosService.guardarUsuario(usuario, roles);
-    }
+    } 
 
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Lista de usuarios obtenida exitosamente"),
+        @ApiResponse(code = 400, message = "No se encontraron usuarios"),
+        @ApiResponse(code = 500, message = "Error interno del servidor")
+    })
     @GetMapping("/{username}")
     public Usuario obtenerUsuario(@PathVariable("username")String username){
       return usuariosService.obtenerUsuario(username);
-    
     }
 
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Lista de usuarios obtenida exitosamente"),
+        @ApiResponse(code = 400, message = "No se encontraron usuarios")
+        @ApiResponse(code = 500, message = "Error interno del servidor")
+    })
     @DeleteMapping("/{usuarioId}")
     public void eliminarUsuario(@PathVariable("usuarioId")long usuarioId) {
       usuariosService.eliminarUsuario(usuarioId); 
