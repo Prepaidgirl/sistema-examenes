@@ -31,7 +31,7 @@ public class UsuarioController {
 
     @ApiResponses(value = {
         @ApiResponse(code = 200, message = "Usuario guardado exitosamente"),
-        @ApiResponse(code = 400, message = "Error al guardar el usuario")
+        @ApiResponse(code = 400, message = "Error al guardar el usuario"),
         @ApiResponse(code = 500, message = "Error interno del servidor")
     })
     @PostMapping("/")
@@ -45,6 +45,8 @@ public class UsuarioController {
       UsuarioRol usuarioRol = new UsuarioRol();
       usuarioRol.setUsuario(usuario);
       usuarioRol.setRol(rol);
+
+      roles.add(usuarioRol); 
 
       return usuariosService.guardarUsuario(usuario, roles);
     } 
