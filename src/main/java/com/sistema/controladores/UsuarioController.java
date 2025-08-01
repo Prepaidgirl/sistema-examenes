@@ -18,6 +18,9 @@ import com.sistema.examenes.Modelos.Rol;
 import com.sistema.examenes.Modelos.Usuario;
 import com.sistema.examenes.Modelos.UsuarioRol;
 
+import io.swagger.annotations.ApiResponse;
+
+
 @RestController
 @RequestMapping("/usuarios")
 @CrossOrigin("*")
