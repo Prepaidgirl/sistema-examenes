@@ -1,10 +1,16 @@
 package com.sistema;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.sistema.Servicios.UsuariosService;
+import com.sistema.examenes.Modelos.Rol;
+import com.sistema.examenes.Modelos.Usuario;
+import com.sistema.examenes.Modelos.UsuarioRol;
 
 @SpringBootApplication
 public class SistemaExamenesBackendApplication implements CommandLineRunner {
