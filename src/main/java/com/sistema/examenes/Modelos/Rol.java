@@ -18,7 +18,7 @@ public class Rol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long rolid;
+    private Long rolId;
     private String nombre;
 
     @OneToMany (cascade=CascadeType.ALL,fetch=FetchType.LAZY, mappedBy="rol")
@@ -49,12 +49,12 @@ public class Rol {
     }
 
 
-    public Long getRolid() {
-        return rolid;
+    public Long getRolId() {
+        return rolId;
     }
 
 
-    public void setRolid(Long rolid) {
-        this.rolid = rolid;
+    public void setRolId(Long rolId) {
+        this.rolId = rolId;
     }
 }

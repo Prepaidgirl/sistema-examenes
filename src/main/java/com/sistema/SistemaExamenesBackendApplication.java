@@ -1,4 +1,5 @@
 package com.sistema;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,8 +16,7 @@ import com.sistema.examenes.Modelos.UsuarioRol;
 @SpringBootApplication
 public class SistemaExamenesBackendApplication implements CommandLineRunner {
 
-
-     @Autowired
+    @Autowired
     private UsuariosService usuariosService;
 
     public static void main(String[] args) {
@@ -24,34 +24,40 @@ public class SistemaExamenesBackendApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
-         Usuario usuario = new Usuario();
+    public void run(String... args) {
+        try {
+            
+            Usuario usuario = new Usuario();
+            usuario.setNombre("Andres");
+            usuario.setApellido("Castro");
+            usuario.setEmail("a1@gmail.com");
+            usuario.setPassword("123456");
+            usuario.setUsername("andres");
+            usuario.setTelefono("123456789");
+            usuario.setPerfil("algo");
 
-         usuario.setNombre("Andres");
-         usuario.setApellido("Castro");
-         usuario.setEmail("a1@gmail.com");
-         usuario.setPassword("123456");
-         usuario.setUsername("andres");
-         usuario.setTelefono("123456789");
-         usuario.setPerfil("algo");
+            
+            Rol rol = new Rol();
+            rol.setRolId(1L); 
+            rol.setNombre("ADMIN");
 
-        Rol rol = new Rol();
-        rol.setNombre("Admin");
+            
+            Set<UsuarioRol> usuarioRoles = new HashSet<>();
+            UsuarioRol usuarioRol = new UsuarioRol();
+            usuarioRol.setRol(rol);
+            usuarioRol.setUsuario(usuario);
+            usuarioRoles.add(usuarioRol);
 
-        Set<UsuarioRol> usuarioRoles = new HashSet<>();
-        UsuarioRol usuarioRol = new UsuarioRol(); 
-        usuarioRol.setRol(rol);
-        usuarioRol.setUsuario(usuario);
-        
+            
+            Usuario usuarioGuardado = usuariosService.guardarUsuario(usuario, usuarioRoles);
+            System.out.println("Usuario guardado: " + usuarioGuardado.getUsername());
 
-        usuarioRoles.add(usuarioRol);
-
-
-        Usuario usuarioGuardado = usuariosService.guardarUsuario(usuario, usuarioRoles);
-        System.out.println(usuarioGuardado.getUsername()); 
-
+        } catch (Exception e) {
+            
+            System.err.println("Error al guardar el usuario inicial:");
+            e.printStackTrace();
+        }
     }
-    
 }
 
  
