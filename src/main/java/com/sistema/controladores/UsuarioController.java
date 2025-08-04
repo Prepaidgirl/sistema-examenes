@@ -18,8 +18,8 @@ import com.sistema.examenes.Modelos.Rol;
 import com.sistema.examenes.Modelos.Usuario;
 import com.sistema.examenes.Modelos.UsuarioRol;
 
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -30,9 +30,9 @@ public class UsuarioController {
     private UsuariosService usuariosService;
 
     @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "Usuario guardado exitosamente"),
-        @ApiResponse(code = 400, message = "Error al guardar el usuario"),
-        @ApiResponse(code = 500, message = "Error interno del servidor")
+        @ApiResponse(responseCode = "200", description = "Usuario guardado exitosamente"),
+        @ApiResponse(responseCode = "400", description = "Error al guardar el usuario"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
     @PostMapping("/")
     public Usuario guardarUsuario(@RequestBody Usuario usuario) throws Exception {
@@ -53,9 +53,9 @@ public class UsuarioController {
     } 
 
     @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "Lista de usuarios obtenida exitosamente"),
-        @ApiResponse(code = 400, message = "No se encontraron usuarios"),
-        @ApiResponse(code = 500, message = "Error interno del servidor")
+        @ApiResponse(responseCode = "200", description = "Lista de usuarios obtenida exitosamente"),
+        @ApiResponse(responseCode = "400", description = "No se encontraron usuarios"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
     @GetMapping("/{username}")
     public Usuario obtenerUsuario(@PathVariable("username")String username){
@@ -63,9 +63,9 @@ public class UsuarioController {
     }
 
     @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "Lista de usuarios obtenida exitosamente"),
-        @ApiResponse(code = 400, message = "No se encontraron usuarios"),
-        @ApiResponse(code = 500, message = "Error interno del servidor")
+        @ApiResponse(responseCode = "200", description = "Lista de usuarios obtenida exitosamente"),
+        @ApiResponse(responseCode = "400", description = "No se encontraron usuarios"),
+        @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
     @DeleteMapping("/{usuarioId}")
     public void eliminarUsuario(@PathVariable("usuarioId")long usuarioId) {
