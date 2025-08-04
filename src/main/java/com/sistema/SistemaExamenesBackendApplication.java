@@ -33,8 +33,10 @@ public class SistemaExamenesBackendApplication implements CommandLineRunner {
         rol.setNombre("Admin");
 
         Set<UsuarioRol> usuarioRoles = new HashSet<>();
+        UsuarioRol usuarioRol = new UsuarioRol(); // <-- Add this line
         usuarioRol.setRol(rol);
         usuarioRol.setUsuario(usuario);
+        
 
         usuarioRoles.add(usuarioRol);
 

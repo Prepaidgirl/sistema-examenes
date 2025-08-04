@@ -63,7 +63,7 @@ public class UsuarioController {
 
     @ApiResponses(value = {
         @ApiResponse(code = 200, message = "Lista de usuarios obtenida exitosamente"),
-        @ApiResponse(code = 400, message = "No se encontraron usuarios")
+        @ApiResponse(code = 400, message = "No se encontraron usuarios"),
         @ApiResponse(code = 500, message = "Error interno del servidor")
     })
     @DeleteMapping("/{usuarioId}")
