@@ -19,7 +19,7 @@ import com.sistema.examenes.Modelos.Usuario;
 import com.sistema.examenes.Modelos.UsuarioRol;
 
 import io.swagger.annotations.ApiResponse;
-
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/usuarios")
