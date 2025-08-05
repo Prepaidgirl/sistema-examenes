@@ -12,4 +12,4 @@ EXPOSE 8015
 
 ADD ./target/sistema-examenes-backend-0.0.1-SNAPSHOT.jar sistema-examenes-backend.jar
 
-ENTRYPOINT java -Xmx$XMX -jar /sistema-examenes-backend.jar --spring.profiles.active=$PROFILE
+ENTRYPOINT ["java", "-Xmx500m", "-jar", "/sistema-examenes-backend.jar", "--spring.profiles.active=production"]
