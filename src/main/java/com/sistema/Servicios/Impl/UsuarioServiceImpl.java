@@ -12,7 +12,7 @@ import com.sistema.examenes.Modelos.Usuario;
 import com.sistema.examenes.Modelos.UsuarioRol;
 
 @Service
-public class UsuarioServiceImpl  implements UsuariosService { 
+public class UsuarioServiceImpl implements UsuariosService { 
 
     @Autowired
     private UsuarioRepository usuarioRespository;
@@ -21,31 +21,29 @@ public class UsuarioServiceImpl  implements UsuariosService {
     private RolRepository rolRespository;
 
     @Override
-    public Usuario guardarUsuario(Usuario usuario, Set<UsuarioRol> usuarioRoles) throws Exception {
-        Usuario usuarioActual = usuarioRespository.findByUsername(usuario.getUsername());
-        if(usuarioActual!=null){
-            System.out.println("El usuario ya existe");
-            throw new Exception("El usuario ya Presente");
-            
-        }
-        else{
-            for(UsuarioRol usuarioRol:usuarioRoles){
-                rolRespository.save(usuarioRol.getRol());
+    public Usuario guardarUsuario(Usuario usuario, Set<UsuarioRol> usuarioRoles) {
+        Usuario usuarioExistente = usuarioRespository.findByUsername(usuario.getUsername());
 
-            }
-            usuario.getUsuarioRoles().addAll(usuarioRoles);
-            usuarioRespository.save(usuario);
-            return usuario;
-            
-        }   
+        if (usuarioExistente != null) {
+            System.out.println("⚠️ El usuario ya existe: " + usuario.getUsername());
+            return usuarioExistente; 
+        }
 
        
+        for (UsuarioRol usuarioRol : usuarioRoles) {
+            rolRespository.save(usuarioRol.getRol());
+        }
+
         
+        usuario.getUsuarioRoles().addAll(usuarioRoles);
+
+       
+        return usuarioRespository.save(usuario);
     }
 
     @Override
     public Usuario obtenerUsuario(String username) {
-       return usuarioRespository.findByUsername(username);
+        return usuarioRespository.findByUsername(username);
     }
 
     @Override
@@ -55,9 +53,7 @@ public class UsuarioServiceImpl  implements UsuariosService {
 
     @Override
     public void actualizarUsuario(Usuario usuario) {
-        
+       
+        usuarioRespository.save(usuario);
     }
 }
-
-    
-
