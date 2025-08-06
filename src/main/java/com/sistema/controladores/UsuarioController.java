@@ -3,7 +3,14 @@ package com.sistema.controladores;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.sistema.Repositorio.RolRepository;
 import com.sistema.Servicios.UsuariosService;
@@ -16,7 +23,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
 @RequestMapping("/usuarios")
-@CrossOrigin(origins = {"http://localhost:4200", "http://192.168.1.157:4200", "http://192.168.1.66:4200", "*"})
+@CrossOrigin(origins = "*") 
 
 public class UsuarioController {
 
