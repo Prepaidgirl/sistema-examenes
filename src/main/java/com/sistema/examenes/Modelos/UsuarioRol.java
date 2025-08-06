@@ -1,5 +1,6 @@
 package com.sistema.examenes.Modelos;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,6 +17,7 @@ public class UsuarioRol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    @Column(name = "usuario_rol_id")
     private Long UsuarioRolId;
 
     @ManyToOne(fetch = FetchType.EAGER)
