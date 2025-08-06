@@ -16,10 +16,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
 @RequestMapping("/usuarios")
-@CrossOrigin(
-    origins = {"http://localhost:4200", "http://192.168.1.241:4200"},
-    allowCredentials = "true"
-)
+@CrossOrigin(origins = {"http://localhost:4200", "http://192.168.1.157:4200", "http://192.168.1.66:4200", "*"})
+
 public class UsuarioController {
 
     private final UsuariosService usuariosService;
