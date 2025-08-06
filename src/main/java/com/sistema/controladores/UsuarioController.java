@@ -3,7 +3,7 @@ package com.sistema.controladores;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +23,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
 @RequestMapping("/usuarios")
-@CrossOrigin("*")
+
 public class UsuarioController {
 
     private final UsuariosService usuariosService;
