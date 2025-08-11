@@ -1,7 +1,5 @@
 package com.sistema.config;
 
-import javax.servlet.Filter;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,8 +29,9 @@ public class MySecurityConfig {
     @Autowired
     private UserDetailsServiceImpl userDetailsServiceImpl;
 
+   
     @Autowired
-    private JwtAuthenticationEntryPoint jwtAuthenticationFilter;
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
@@ -41,9 +40,7 @@ public class MySecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-       
         return new BCryptPasswordEncoder();
-        
     }
 
     @Bean
@@ -54,7 +51,7 @@ public class MySecurityConfig {
         return authProvider;
     }
 
-      @Bean
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .csrf(csrf -> csrf.disable())
@@ -68,7 +65,8 @@ public class MySecurityConfig {
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authenticationProvider(authenticationProvider());
 
-        http.addFilterBefore((Filter) jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        
+        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
