@@ -47,7 +47,7 @@ public class JwtAuthenticationFilter  extends OncePerRequestFilter {
                 exception.printStackTrace();
             }
         } else {
-            System.out.println("Token invalido, no empieza con beare string ");
+            System.out.println("Token invalido, no empieza con bearer string ");
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
