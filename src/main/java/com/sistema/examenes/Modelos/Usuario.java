@@ -1,6 +1,7 @@
 package com.sistema.examenes.Modelos;
 
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,9 +17,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 @Entity
 @Table(name = "usuarios")
-public class Usuario {
+public class Usuario implements UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -146,6 +150,43 @@ public class Usuario {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<Authority> autoridades =  new HashSet<>();
+        this.usuarioRoles.forEach(usuarioRol -> {
+            autoridades.add(new Authority(usuarioRol.getRol().getNombre()));
+        });
+        return autoridades;
+    }
+       
+       
+
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+       return true; 
+    }
+
+
+    @Override
+    public boolean isEnabled() {
+        
+        throw new UnsupportedOperationException("Unimplemented method 'isEnabled'");
     }
 
 }
