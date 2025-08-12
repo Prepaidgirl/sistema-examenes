@@ -19,21 +19,17 @@ public class JwtUtils {
         "clave-super-secreta-para-jwt-1234567890".getBytes()
     );
 
-    
-
-
     // Generar token
-   public String generateToken(UserDetails userDetails) {
-    System.out.println("UserDetails username: " + userDetails.getUsername());
+    public String generateToken(UserDetails userDetails) {
+        System.out.println("UserDetails username: " + userDetails.getUsername());
 
-    Map<String, Object> claims = new HashMap<>();
-    String token = createToken(claims, userDetails.getUsername());
+        Map<String, Object> claims = new HashMap<>();
+        String token = createToken(claims, userDetails.getUsername());
 
-    System.out.println("Token generado: " + token);
+        System.out.println("Token generado: " + token);
 
-    return token;
-}
-
+        return token;
+    }
 
     // Crear token con claims y fechas
     private String createToken(Map<String, Object> claims, String subject) {
