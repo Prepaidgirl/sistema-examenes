@@ -52,10 +52,8 @@ public class AuthenticationController {
             // Generar token
             String token = this.jwtUtils.generateToken(userDetails);
             
-            // Crear respuesta con el token
-            JwtResponse jwtResponse = new JwtResponse(token);
-            
-            return ResponseEntity.ok(jwtResponse);
+            return ResponseEntity.ok(new JwtResponse(token));
+
             
         } catch (UsernameNotFoundException usernameNotFoundException) {
             usernameNotFoundException.printStackTrace();
