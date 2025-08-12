@@ -18,7 +18,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.sistema.Servicios.Impl.UserDetailsServiceImpl;
 
-
 import io.jsonwebtoken.ExpiredJwtException;
 
 @Component
@@ -32,6 +31,14 @@ public class JwtAuthenticationFilter  extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+
+        // 🔹 Ignorar validación para rutas públicas
+        String path = request.getServletPath();
+        if (path.equals("/generate-token") || path.equals("/usuarios/")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         String requestokenHeader = request.getHeader("Authorization");
         String username = null;
         String jwtToken = null;
@@ -61,7 +68,7 @@ public class JwtAuthenticationFilter  extends OncePerRequestFilter {
             else{
                 System.out.println("El token no es valido");
             }
-            filterChain.doFilter(request, response);
         }
+        filterChain.doFilter(request, response);
     }
 }
