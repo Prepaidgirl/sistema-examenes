@@ -1,5 +1,7 @@
 package com.sistema.configuraciones;
 
+import com.sistema.configuraciones.JwtUtils;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
