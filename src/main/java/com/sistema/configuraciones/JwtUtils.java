@@ -7,7 +7,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +15,8 @@ import java.util.function.Function;
 @Component
 public class JwtUtils {
 
-    private String SECRET_KEY = "examportal";
+   
+    private String SECRET_KEY = "nX+XnvgVYcTSaT7XZyjswnvQ1Atcb2uK3aKjzUf3JmA=";
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -30,6 +30,7 @@ public class JwtUtils {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
+
     private Claims extractAllClaims(String token) {
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
     }
