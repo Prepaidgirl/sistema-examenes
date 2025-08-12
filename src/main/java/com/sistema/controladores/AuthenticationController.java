@@ -21,7 +21,6 @@ import com.sistema.configuraciones.JwtUtils;
 import com.sistema.examenes.Modelos.JwtRequest;
 import com.sistema.examenes.Modelos.JwtResponse;
 import com.sistema.examenes.Modelos.Usuario;
-;
 
 @RestController
 @CrossOrigin("*")
@@ -36,39 +35,35 @@ public class AuthenticationController {
     @Autowired
     private JwtUtils jwtUtils;
 
-    private Object userDetailsService;
-
-    
-
     @PostMapping("/generate-token")
     public ResponseEntity<?> generarToken(@RequestBody JwtRequest jwtRequest) {
         try {
-            // Autenticar al usuario
+            // Paso 1: Autenticar al usuario
             autenticar(jwtRequest.getUsername(), jwtRequest.getPassword());
-            
-            // Cargar detalles del usuario
+
+            // Paso 2: Cargar detalles del usuario
             UserDetails userDetails = this.userDetailsServiceImpl.loadUserByUsername(jwtRequest.getUsername());
-            
-            // Generar token
+
+            // Paso 3: Generar token
             String token = this.jwtUtils.generateToken(userDetails);
-            
+            System.out.println("TOKEN GENERADO: " + token); // Para depuración
+
             return ResponseEntity.ok(new JwtResponse(token));
 
-            
-        } catch (UsernameNotFoundException usernameNotFoundException) {
-            usernameNotFoundException.printStackTrace();
+        } catch (UsernameNotFoundException e) {
+            e.printStackTrace();
             return ResponseEntity.status(404).body("Usuario no encontrado");
-            
-        } catch (BadCredentialsException badCredentialsException) {
-            badCredentialsException.printStackTrace();
+
+        } catch (BadCredentialsException e) {
+            e.printStackTrace();
             return ResponseEntity.status(401).body("Credenciales inválidas");
-            
-        } catch (DisabledException disabledException) {
-            disabledException.printStackTrace();
+
+        } catch (DisabledException e) {
+            e.printStackTrace();
             return ResponseEntity.status(401).body("Usuario deshabilitado");
-            
-        } catch (Exception generalException) {
-            generalException.printStackTrace();
+
+        } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(500).body("Error interno del servidor");
         }
     }
@@ -77,17 +72,14 @@ public class AuthenticationController {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         } catch (DisabledException e) {
-            throw new Exception("USUARIO DESHABILITADO: " + e.getLocalizedMessage());
+            throw new DisabledException("Usuario deshabilitado", e);
         } catch (BadCredentialsException e) {
-            throw new Exception("Credenciales inválidas: " + e.getMessage());
+            throw new BadCredentialsException("Credenciales inválidas", e);
         }
     }
 
     @GetMapping("/actual-usuario")
-    public Usuario obtenerUsuarioActual(Principal principal){
-        return (Usuario) ((UserDetailsServiceImpl) this.userDetailsService).loadUserByUsername(principal.getName());
+    public Usuario obtenerUsuarioActual(Principal principal) {
+        return (Usuario) this.userDetailsServiceImpl.loadUserByUsername(principal.getName());
     }
-
-    
-
-} 
+}
