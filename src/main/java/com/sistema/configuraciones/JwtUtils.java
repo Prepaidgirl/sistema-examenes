@@ -17,7 +17,7 @@ import java.util.function.Function;
 public class JwtUtils {
 
     
-    private final String SECRET_KEY = "examportal";
+    private final String SECRET_KEY = "examportalexamportalexamportalexamportal";
     
   
     private Key getSigningKey() {
