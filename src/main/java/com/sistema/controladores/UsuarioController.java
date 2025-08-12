@@ -80,4 +80,4 @@ public class UsuarioController {
     public void eliminarUsuario(@PathVariable("usuarioId") long usuarioId) {
         usuariosService.eliminarUsuario(usuarioId);
     }
-}
+}   

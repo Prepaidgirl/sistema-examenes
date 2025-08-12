@@ -185,8 +185,7 @@ public class Usuario implements UserDetails{
 
     @Override
     public boolean isEnabled() {
-        
-        throw new UnsupportedOperationException("Unimplemented method 'isEnabled'");
+        return true;
     }
 
 }

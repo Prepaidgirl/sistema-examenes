@@ -8,6 +8,7 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import com.sistema.Servicios.Impl.UserDetailsServiceImpl;
 import com.sistema.config.JwtUtils;
 import com.sistema.examenes.Modelos.JwtRequest;
 import com.sistema.examenes.Modelos.JwtResponse;
+;
 
 @RestController
 public class AuthenticationController {
@@ -28,6 +30,8 @@ public class AuthenticationController {
 
     @Autowired
     private JwtUtils jwtUtils;
+
+    
 
     @PostMapping("/generate-token")
     public ResponseEntity<?> generarToken(@RequestBody JwtRequest jwtRequest) {
@@ -73,4 +77,5 @@ public class AuthenticationController {
             throw new Exception("Credenciales inválidas: " + e.getMessage());
         }
     }
-}
+
+} 
