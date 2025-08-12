@@ -1,16 +1,14 @@
 package com.sistema.examenes.Modelos;
 
-
-
 public class JwtResponse {
+
     private String token;
 
     public JwtResponse(String token) {
         this.token = token;
     }
-    
-    public JwtResponse(){
 
+    public JwtResponse() {
     }
 
     public String getToken() {
@@ -20,6 +18,4 @@ public class JwtResponse {
     public void setToken(String token) {
         this.token = token;
     }
-
-    
 }
