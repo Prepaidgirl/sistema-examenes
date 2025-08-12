@@ -1,5 +1,7 @@
 package com.sistema.controladores;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -9,6 +11,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +20,7 @@ import com.sistema.Servicios.Impl.UserDetailsServiceImpl;
 import com.sistema.configuraciones.JwtUtils;
 import com.sistema.examenes.Modelos.JwtRequest;
 import com.sistema.examenes.Modelos.JwtResponse;
+import com.sistema.examenes.Modelos.Usuario;
 ;
 
 @RestController
@@ -31,6 +35,8 @@ public class AuthenticationController {
 
     @Autowired
     private JwtUtils jwtUtils;
+
+    private Object userDetailsService;
 
     
 
@@ -77,6 +83,11 @@ public class AuthenticationController {
         } catch (BadCredentialsException e) {
             throw new Exception("Credenciales inválidas: " + e.getMessage());
         }
+    }
+
+    @GetMapping("/actual-usuario")
+    public Usuario obtenerUsuarioActual(Principal principal){
+        return (Usuario) ((UserDetailsServiceImpl) this.userDetailsService).loadUserByUsername(principal.getName());
     }
 
     
