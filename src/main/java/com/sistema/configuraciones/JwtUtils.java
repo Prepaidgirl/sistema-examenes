@@ -1,4 +1,4 @@
-package com.sistema.config;
+package com.sistema.configuraciones;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
