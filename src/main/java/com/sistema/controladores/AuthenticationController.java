@@ -2,12 +2,10 @@ package com.sistema.controladores;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+
+
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,8 +20,7 @@ import com.sistema.examenes.Modelos.JwtResponse;
 @RestController
 public class AuthenticationController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+   
 
     @Autowired
     private UserDetailsServiceImpl userDetailsServiceImpl;
@@ -33,49 +30,42 @@ public class AuthenticationController {
 
     
 
-    @PostMapping("/generate-token")
-    public ResponseEntity<?> generarToken(@RequestBody JwtRequest jwtRequest) {
-        try {
-            // Autenticar al usuario
-            autenticar(jwtRequest.getUsername(), jwtRequest.getPassword());
-            
-            // Cargar detalles del usuario
-            UserDetails userDetails = this.userDetailsServiceImpl.loadUserByUsername(jwtRequest.getUsername());
-            
-            // Generar token
-            String token = this.jwtUtils.generateToken(userDetails);
-            
-            // Crear respuesta con el token
-            JwtResponse jwtResponse = new JwtResponse(token);
-            
-            return ResponseEntity.ok(jwtResponse);
-            
-        } catch (UsernameNotFoundException usernameNotFoundException) {
-            usernameNotFoundException.printStackTrace();
-            return ResponseEntity.status(404).body("Usuario no encontrado");
-            
-        } catch (BadCredentialsException badCredentialsException) {
-            badCredentialsException.printStackTrace();
-            return ResponseEntity.status(401).body("Credenciales inválidas");
-            
-        } catch (DisabledException disabledException) {
-            disabledException.printStackTrace();
-            return ResponseEntity.status(401).body("Usuario deshabilitado");
-            
-        } catch (Exception generalException) {
-            generalException.printStackTrace();
-            return ResponseEntity.status(500).body("Error interno del servidor");
-        }
+  @PostMapping("/generate-token")
+public ResponseEntity<?> generarToken(@RequestBody JwtRequest jwtRequest) {
+    System.out.println("=== INICIO GENERATE TOKEN ===");
+    System.out.println("Username recibido: " + jwtRequest.getUsername());
+    System.out.println("Password recibido: " + jwtRequest.getPassword());
+    
+    try {
+        System.out.println("Intentando autenticar...");
+        autenticar(jwtRequest.getUsername(), jwtRequest.getPassword());
+        System.out.println("Autenticación exitosa");
+        
+        System.out.println("Cargando detalles del usuario...");
+        UserDetails userDetails = this.userDetailsServiceImpl.loadUserByUsername(jwtRequest.getUsername());
+        System.out.println("Usuario cargado: " + userDetails.getUsername());
+        
+        System.out.println("Generando token...");
+        String token = this.jwtUtils.generateToken(userDetails);
+        System.out.println("Token generado: " + (token != null ? "SÍ" : "NO"));
+        
+        JwtResponse jwtResponse = new JwtResponse(token);
+        System.out.println("Enviando respuesta...");
+        
+        return ResponseEntity.ok(jwtResponse);
+        
+    } catch (Exception e) {
+        System.out.println("ERROR CAPTURADO: " + e.getMessage());
+        e.printStackTrace();
+        return ResponseEntity.status(500).body("Error: " + e.getMessage());
     }
+}
 
-    private void autenticar(String username, String password) throws Exception {
-        try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-        } catch (DisabledException e) {
-            throw new Exception("USUARIO DESHABILITADO: " + e.getLocalizedMessage());
-        } catch (BadCredentialsException e) {
-            throw new Exception("Credenciales inválidas: " + e.getMessage());
-        }
-    }
+
+
+  private void autenticar(String username, String password) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'autenticar'");
+  }
 
 } 
